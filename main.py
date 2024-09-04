@@ -13,18 +13,29 @@ logging.basicConfig(
 
 if __name__ == '__main__':
     application = ApplicationBuilder().token(config.BOT_TOKEN).build()
+
+    commands = [
+    ('start', start),
+    ('today', today),
+    ('tomorrow', tomorrow),
+    ('week', week),
+    ('next_week', next_week)
+]
+
+for command, handler in commands:
+    application.add_handler(CommandHandler(command, handler))
     
     start_handler = CommandHandler('start', start)
     today_handler = CommandHandler('today', today)
-    # tomorrow_handler = CommandHandler('tomorrow', tomorrow)
-    # week_handler = CommandHandler('week', week)
-    # next_week_handler = CommandHandler('next_week', next_week)
+    tomorrow_handler = CommandHandler('tomorrow', tomorrow)
+    week_handler = CommandHandler('week', week)
+    next_week_handler = CommandHandler('next_week', next_week)
 
     application.add_handler(start_handler)
     application.add_handler(today_handler)
-    # application.add_handler(tomorrow_handler)
-    # application.add_handler(week_handler)
-    # application.add_handler(next_week_handler)
+    application.add_handler(tomorrow_handler)
+    application.add_handler(week_handler)
+    application.add_handler(next_week_handler)
 
     application.run_polling()  
 
