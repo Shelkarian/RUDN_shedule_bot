@@ -4,8 +4,6 @@ from telegram.ext import ApplicationBuilder, ContextTypes, CommandHandler
 import config
 from handlers import start, tomorrow, today, week, next_week
 
-
-
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
@@ -14,17 +12,6 @@ logging.basicConfig(
 if __name__ == '__main__':
     application = ApplicationBuilder().token(config.BOT_TOKEN).build()
 
-    commands = [
-    ('start', start),
-    ('today', today),
-    ('tomorrow', tomorrow),
-    ('week', week),
-    ('next_week', next_week)
-]
-
-for command, handler in commands:
-    application.add_handler(CommandHandler(command, handler))
-    
     start_handler = CommandHandler('start', start)
     today_handler = CommandHandler('today', today)
     tomorrow_handler = CommandHandler('tomorrow', tomorrow)
